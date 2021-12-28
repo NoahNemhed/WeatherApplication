@@ -1,3 +1,4 @@
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>    
 <!DOCTYPE html>
@@ -16,35 +17,33 @@
 	     <%	
 	     try{
 		     if(request.getSession().getAttribute("Allow-cookies") != null){
-		    	 if(request.getSession().getValue("Allow-cookies").equals("false")){
-			    	 	out.print("");
-			    	    Cookie[] list = request.getCookies();
-			    	    if (list != null) {
-			    	        for (int i = 0; i < list.length; i++) {
-			    	            list[i].setMaxAge(0);
-			    	        }
-			    	    }
-		    	 }
+
 	    	 
 		     } if(request.getSession().getValue("Allow-cookies").equals("true")){
 	    		
 	    			
 	    			Cookie[] cookies = request.getCookies();
+	    			
 	    			if(cookies.length != 0){
-	    				out.print("Recent search : ");
-	    				Cities : 
-	    				for(Cookie c : cookies){
-	    					if(c.getName().equals("cityStr")){
-	    						out.print(c.getValue());
 
+	    				ArrayList<Cookie> ar = new ArrayList();
+
+	    				for(Cookie c : cookies){
+	    					if(c.getName().equals("cityStr")){	
+	    						ar.add(c);
 	    					}
 	    				}
-	    				out.print(" ");
-	    				Countries : for(Cookie c : cookies){
+	    				for(Cookie c : cookies){
 	    					 if(c.getName().equals("countryStr")){
-	    						 out.print(c.getValue());
+	    						 ar.add(c);
 	    					 }
+	    					 
 	    				}
+	    				
+	    				
+	    				response.sendRedirect("http://localhost:8080/WeatherApp/weatherServlet?city=" + ar.get(0).getValue() + "&country=" + ar.get(1).getValue() + "&allow-cookies=on");
+
+	    			
 	    			}		
 	    			
 	    		}
@@ -55,7 +54,7 @@
 	<form action="weatherServlet">
 	City : <input type="text" name="city" required>
 	<br>
-	Country : <input type="text" name="country" placeholder="Format DE, SE, DK" required>
+	 Country :<input type="text" name="country" placeholder="Format DE, SE, DK" required>
 	<br>
 	Allow cookies : <input type="checkbox" name="allow-cookies">
 	<br>
