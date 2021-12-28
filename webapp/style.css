@@ -9,7 +9,6 @@ body{
 .section1{
 	border: solid 3px black;
 	margin: 0 auto; 
-	margin-top: 250px;
 	width: 400px;
 	font-size: larger;
 }
