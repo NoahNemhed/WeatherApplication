@@ -10,6 +10,8 @@
 </head>
 <body>
 
+	
+
 	<section class="section1">
 	
 				<%
@@ -21,15 +23,34 @@
 				out.print("Weather Celcius - "+ Math.round((wBean.getWeatherDescription()  - 273.15)));
 				out.print("<br>");
 				out.print("Clouds -  "+ wBean.getCloudsStr());	
+
+				
+				
 			
 	
 	%>
-	<br>
-	<form method="get" action="index.jsp">
-    <button type="submit">Another search</button>
-	</form>
+	
+	</section>
+	
+	<section class="section1">
+		<form action="weatherServlet">
+		City : <input type="text" name="city" required>
+		<br>
+		 Country :<input type="text" name="country" placeholder="Format DE, SE, DK" required>
+		<br>
+		Allow cookies : <input type="checkbox" name="allow-cookies" checked="checked">
+		<br>
+		<input type="submit" value="Another Search">
+		</form>
 		
 	</section>
+	
+
+	
+	
+
+		
+	
 		
 
 	
